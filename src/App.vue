@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="text" name="name" class="form-control" v-model="search">   
+        <button @click="onSubmit(search)">Submit</button>
+        {{search}}
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      response: null,
+      search: 'wdw'
+    };
+  },
+  methods: {
+    onSubmit(query) {
+      axios.get(' https://api.jikan.moe/v3/search/anime?q='+query)
+    .then(res =>{
+      console.log(res)
+      this.response = res
+      console.log(this.response)
+    })
+    .catch(error => console.log(error))
+    }
   }
 }
 </script>
