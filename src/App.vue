@@ -14,15 +14,15 @@ export default {
   data() {
     return {
       response: null,
-      search: 'wdw'
+      search: ''
     };
   },
   methods: {
     onSubmit(query) {
       axios.get(' https://api.jikan.moe/v3/search/anime?q='+query)
     .then(res =>{
-      console.log(res)
-      this.response = res
+      console.log(query)
+      this.response = res.data.results
       console.log(this.response)
     })
     .catch(error => console.log(error))
