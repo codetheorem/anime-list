@@ -6,7 +6,7 @@
           
           <img src="https://wallpaperaccess.com/full/39052.png" class="img-fluid" alt="Responsive image">
           <br><br>
-          <input type="text" name="name" class="form-control" v-model="search" @input="onSubmit(search)">   
+          <input type="text" name="name" class="form-control" v-model="search" @input="onSubmit(search)" placeholder="Search anime...">   
       
         </div>
           <div id="result">
