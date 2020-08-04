@@ -2,15 +2,25 @@
   <div id="app">
     <input type="text" name="name" class="form-control" v-model="search">   
         <button @click="onSubmit(search)">Submit</button>
-        {{search}}
+       <br><br>
+      <ul>
+        <li v-for="(item,i) in response" :key="i"> <appcard :title="item.title"
+                                                            :score="item.score"
+                                                            :episodes="item.episodes"
+                                                            :synopsis="item.synopsis"/></li>
+      </ul>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import cardVue from './components/card.vue';
 
 export default {
   name: 'App',
+  components: {
+    appcard: cardVue
+  },
   data() {
     return {
       response: null,
@@ -39,5 +49,23 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+ul{
+  list-style: none;
+  width: 90%;
+  margin: auto;
+}
+.wrapper {
+  text-align: center;
+}
+.wrapper ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  zoom:1;
+  *display: inline;
+}
+.wrapper li {
+  padding: 2px 5px;
 }
 </style>
