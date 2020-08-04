@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <input type="text" name="name" class="form-control" v-model="search">   
-        <button @click="onSubmit(search)">Submit</button>
+        <button @click="onSubmit(search)"  class="btn btn-primary">Submit</button>
        <br><br>
       <ul>
         <li v-for="(item,i) in response" :key="i"> <appcard :title="item.title"
