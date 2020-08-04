@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <input type="text" name="name" class="form-control" v-model="search">   
+    <input type="text" name="name" class="form-control" v-model="search" @input="onSubmit(search)">   
         <button @click="onSubmit(search)"  class="btn btn-primary">Submit</button>
        <br><br>
       <ul>
