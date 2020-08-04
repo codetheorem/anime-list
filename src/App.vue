@@ -1,14 +1,27 @@
 <template>
   <div id="app">
-    <input type="text" name="name" class="form-control" v-model="search" @input="onSubmit(search)">   
-        <button @click="onSubmit(search)"  class="btn btn-primary">Submit</button>
-       <br><br>
-      <ul>
-        <li v-for="(item,i) in response" :key="i"> <appcard :title="item.title"
-                                                            :score="item.score"
-                                                            :episodes="item.episodes"
-                                                            :synopsis="item.synopsis"/></li>
-      </ul>
+    <div class="outer">
+      <div class="middle">
+        <div class="inner">
+          
+          <img src="https://wallpaperaccess.com/full/39052.png" class="img-fluid" alt="Responsive image">
+          <br><br>
+          <input type="text" name="name" class="form-control" v-model="search" @input="onSubmit(search)">   
+      
+        </div>
+          <div id="result">
+          <ul>
+            <li v-for="(item,i) in response" :key="i"> <appcard :title="item.title"
+                                                                :score="item.score"
+                                                                :episodes="item.episodes"
+                                                                :synopsis="item.synopsis"/></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+       
+       
+      
   </div>
 </template>
 
@@ -42,6 +55,27 @@ export default {
 </script>
 
 <style>
+.outer {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  padding: 10px;
+  /*whatever width you want*/
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -52,7 +86,7 @@ export default {
 }
 ul{
   list-style: none;
-  width: 90%;
+  width: 50%;
   margin: auto;
 }
 .wrapper {
@@ -67,5 +101,9 @@ ul{
 }
 .wrapper li {
   padding: 2px 5px;
+}
+img{
+  border-radius: 15px;
+  border: 2px solid greenyellow;
 }
 </style>
