@@ -10,18 +10,20 @@
       
         </div>
           <div id="result">
-          <ul>
-            <li v-for="(item,i) in response" :key="i"> <appcard :title="item.title"
-                                                                :score="item.score"
-                                                                :episodes="item.episodes"
-                                                                :synopsis="item.synopsis"/></li>
-          </ul>
+       <ul>
+        <div class="row">
+         <appcard  v-for="(item,i) in response" :key="i"
+                  :title="item.title"
+                  :score="item.score"
+                  :episodes="item.episodes"
+                  :synopsis="item.synopsis"
+                  :image="item.image_url"
+                  class="col-lg-3 col-md-3 col-sm-6"/>
+        </div>
+       </ul>
         </div>
       </div>
     </div>
-       
-       
-      
   </div>
 </template>
 
