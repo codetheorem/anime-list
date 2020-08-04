@@ -1,26 +1,17 @@
 <template>
-    <div class="-shadow" id="box">
-      <h4 class="title">
-        title: {{ title }}
-      </h4>
-      <span class="eyebrow">
-        score: {{ score }}/10
-      </span>
-      <br>
-      <span class="eyebrow">
-        Episodes: {{ episodes }}
-      </span>
-      <br>
-        <span class="eyebrow">
-        synopsis: {{ synopsis }}
-      </span>
-      <br>
-    </div>
+    <div class="card" style="width: 18rem;">
+  <img :src="image" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <p class="card-text">{{synopsis}}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 </template>
 
 <script>
 export default {
-    props: ['title','episodes','score','synopsis'],
+    props: ['title','episodes','score','synopsis','image'],
     
 }
 </script>

@@ -4,10 +4,15 @@
         <button @click="onSubmit(search)"  class="btn btn-primary">Submit</button>
        <br><br>
       <ul>
-        <li v-for="(item,i) in response" :key="i"> <appcard :title="item.title"
-                                                            :score="item.score"
-                                                            :episodes="item.episodes"
-                                                            :synopsis="item.synopsis"/></li>
+        <div class="row">
+         <appcard  v-for="(item,i) in response" :key="i"
+                  :title="item.title"
+                  :score="item.score"
+                  :episodes="item.episodes"
+                  :synopsis="item.synopsis"
+                  :image="item.image_url"
+                  class="col-lg-3 col-md-3 col-sm-6"/>
+        </div>
       </ul>
   </div>
 </template>
