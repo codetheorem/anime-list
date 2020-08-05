@@ -5,14 +5,13 @@
         <div class="inner">
           <img src="https://wallpaperaccess.com/full/39052.png" class="img-fluid" alt="Responsive image">
           <br><br>
-          <input type="text" name="name" class="form-control" v-model="search" @input="onSubmit(search)" placeholder="Search anime...">   
+          <input type="text" name="name" class="form-control" v-model="search" @input="onsearch(search)" placeholder="Search anime...">   
         </div>
         
-    <div id="result">
-       <ul>
-        <li v-for="(item,i) in response" :key="i">
-          <h4>{{item.title}}</h4>
-          <button @click="addSubmit(i)">add +</button>
+    <div id="result" v-show="searchdisplay">
+       <ul class="list-group list-group-flush">
+        <li v-for="(item,i) in response" :key="i" @click="addtowatchlist(item)" class="list-group-item">
+          {{item.title}}
         </li>
        </ul>
     </div>
@@ -23,7 +22,7 @@
         <h1>Watch List</h1>
        <ul>
         <div class="row">
-         <appcard  v-for="(item,i) in list" :key="i"
+         <appcard  v-for="(item,i) in watchlist" :key="i"
                   :data="item"/>
         </div>
        </ul>
@@ -50,22 +49,25 @@ export default {
     return {
       response: null,
       search: '',
-      list: [],
-      display: false
+      watchlist: [],
+      display: false,
+      searchdisplay: true,
     };
   },
   methods: {
-    onSubmit(query) {
+    onsearch(query) {
       axios.get(' https://api.jikan.moe/v3/search/anime?q='+query)
     .then(res =>{
       this.response = res.data.results
       this.response= this.response.slice(0,10)
     })
     .catch(error => console.log(error))
+    this.searchdisplay=true
     },
-    addSubmit(index) {
+    addtowatchlist(item) {
       this.display = true
-      this.list.push(this.response[index])
+      this.watchlist.push(item)
+      this.searchdisplay=false
     }
   }
 }
