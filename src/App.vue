@@ -3,25 +3,34 @@
     <div class="outer">
       <div class="middle">
         <div class="inner">
-          
           <img src="https://wallpaperaccess.com/full/39052.png" class="img-fluid" alt="Responsive image">
           <br><br>
           <input type="text" name="name" class="form-control" v-model="search" @input="onSubmit(search)" placeholder="Search anime...">   
-      
         </div>
-          <div id="result">
+        
+    <div id="result">
+       <ul>
+        <li v-for="(item,i) in response" :key="i">
+          <h4>{{item.title}}</h4>
+          <button @click="addSubmit(i)">add +</button>
+        </li>
+       </ul>
+    </div>
+
+      <br><br>
+
+      <div v-if="display" id="result">
+        <h1>Watch List</h1>
        <ul>
         <div class="row">
-         <appcard  v-for="(item,i) in response" :key="i"
-                  :title="item.title"
-                  :score="item.score"
-                  :episodes="item.episodes"
-                  :synopsis="item.synopsis"
-                  :image="item.image_url"
-                  class="col-lg-3 col-md-3 col-sm-6"/>
+         <appcard  v-for="(item,i) in list" :key="i"
+                  :data="item"/>
         </div>
        </ul>
-        </div>
+      </div>
+
+      <br><br>
+
       </div>
     </div>
   </div>
@@ -34,23 +43,28 @@ import cardVue from './components/card.vue';
 export default {
   name: 'App',
   components: {
-    appcard: cardVue
+    appcard: cardVue,
   },
   data() {
     return {
       response: null,
-      search: ''
+      search: '',
+      list: [],
+      display: false
     };
   },
   methods: {
     onSubmit(query) {
       axios.get(' https://api.jikan.moe/v3/search/anime?q='+query)
     .then(res =>{
-      console.log(query)
       this.response = res.data.results
-      console.log(this.response)
+      this.response= this.response.slice(0,5)
     })
     .catch(error => console.log(error))
+    },
+    addSubmit(index) {
+      this.display = true
+      this.list.push(this.response[index])
     }
   }
 }
@@ -107,5 +121,8 @@ ul{
 img{
   border-radius: 15px;
   border: 2px solid greenyellow;
+}
+#result{
+  
 }
 </style>
