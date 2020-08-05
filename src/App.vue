@@ -10,18 +10,17 @@
       
         </div>
           <div id="result">
-       <ul>
-        <div class="row">
-         <appcard  v-for="(item,i) in response" :key="i"
+                  <ul class="list-group list-group-flush">
+                    <li v-for="(item,i) in response" :key="i" v-show="i<=10" class="list-group-item" @click="addtowatchlist(item)" >{{item.title}}</li>
+                  </ul>
+        </div>
+          <appcard  v-for="(item,i) in watchlist" :key="i"
                   :title="item.title"
                   :score="item.score"
                   :episodes="item.episodes"
                   :synopsis="item.synopsis"
                   :image="item.image_url"
                   class="col-lg-3 col-md-3 col-sm-6"/>
-        </div>
-       </ul>
-        </div>
       </div>
     </div>
   </div>
@@ -39,7 +38,8 @@ export default {
   data() {
     return {
       response: null,
-      search: ''
+      search: '',
+      watchlist:[],
     };
   },
   methods: {
@@ -51,6 +51,9 @@ export default {
       console.log(this.response)
     })
     .catch(error => console.log(error))
+    },
+    addtowatchlist(item){
+       this.watchlist.push(item);
     }
   }
 }
@@ -82,7 +85,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
@@ -90,9 +92,6 @@ ul{
   list-style: none;
   width: 50%;
   margin: auto;
-}
-.wrapper {
-  text-align: center;
 }
 .wrapper ul {
   display: inline-block;
@@ -107,5 +106,9 @@ ul{
 img{
   border-radius: 15px;
   border: 2px solid greenyellow;
+}
+
+li:hover{
+cursor: pointer;
 }
 </style>
