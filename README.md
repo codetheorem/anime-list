@@ -1,5 +1,7 @@
 # animeapp
 
+![CI](https://github.com/Bot-Academia/anime-list/workflows/CI/badge.svg)
+
 ## Project setup
 ```
 npm install
