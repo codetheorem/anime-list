@@ -31,6 +31,7 @@
 
       <br><br>
 
+
       </div>
     </div>
   </div>
@@ -58,7 +59,7 @@ export default {
       axios.get(' https://api.jikan.moe/v3/search/anime?q='+query)
     .then(res =>{
       this.response = res.data.results
-      this.response= this.response.slice(0,5)
+      this.response= this.response.slice(0,10)
     })
     .catch(error => console.log(error))
     },
@@ -96,7 +97,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
@@ -104,9 +104,6 @@ ul{
   list-style: none;
   width: 50%;
   margin: auto;
-}
-.wrapper {
-  text-align: center;
 }
 .wrapper ul {
   display: inline-block;
@@ -122,7 +119,8 @@ img{
   border-radius: 15px;
   border: 2px solid greenyellow;
 }
-#result{
-  
+
+li:hover{
+cursor: pointer;
 }
 </style>
