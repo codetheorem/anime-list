@@ -23,7 +23,9 @@
        <ul>
         <div class="row">
          <appcard  v-for="(item,i) in watchlist" :key="i"
-                  :data="item"/>
+                  :data="item"
+                  :index="i"
+                  @removed="remove($event)"/>
         </div>
        </ul>
       </div>
@@ -66,10 +68,31 @@ export default {
     },
     addtowatchlist(item) {
       this.display = true
-      this.watchlist.push(item)
       this.searchdisplay=false
+      this.watchlist.push(item)
+      const parsed = JSON.stringify(this.watchlist);
+      localStorage.setItem('watchlist', parsed);
+    },
+    remove(index) {
+      this.watchlist.splice(index,1);
+      if(this.watchlist.length<1){
+        this.display=false
+      }
     }
-  }
+  },
+  mounted() {
+    if (localStorage.getItem('watchlist')) {
+      try {
+        this.watchlist = JSON.parse(localStorage.getItem('watchlist'));
+        console.log(this.watchlist)
+        if(this.watchlist.length>0){
+          this.display=true
+        }
+      } catch(e) {
+        localStorage.removeItem('watchlist');
+      }
+    }
+  },
 }
 </script>
 
@@ -124,5 +147,8 @@ img{
 
 li:hover{
 cursor: pointer;
+}
+h1{
+  text-align: center;
 }
 </style>
