@@ -1,5 +1,5 @@
 <template>
-<div class="card">
+<div :class="[ (watch === false) ? active : nonactive]">
   <div class="row">
     <div class="col-4">
         <img :src="data.image_url" class="img-thumbnail" alt="...">
@@ -20,8 +20,9 @@
         </div>
         <br>
         <p class="card-text">{{data.synopsis}}</p>
-        <button type="button" class="btn btn-success">Watched</button>
-        <button type="button" class="btn btn-danger">Remove</button>
+        <button type="button" class="btn btn-success" v-if="!watch" @click="watch=!watch">Watched</button>
+        <button type="button" class="btn btn-success" v-else @click="watch=!watch">Unwatched</button>
+        <button type="button" class="btn btn-danger" @click="remove(index)">Remove</button>
         <a :href="data.url" target="_blank"><button  type="button" class="btn btn-primary">See more...</button></a>
       </div>
     </div>
@@ -31,12 +32,35 @@
 
 <script>
 export default {
-    props: ['data'],
-    
+    props: ['data','index'],
+    data() {
+      return {
+        watch: false,
+        active: 'card',
+        nonactive: 'disabled'
+      };
+    },
+    methods: {
+      remove(index) {
+        this.$emit('removed',index);
+      }
+    }
 }
 </script>
 
 <style scoped>
+.disabled{
+  padding: 10px;
+  margin-bottom: 24px;
+  margin: 5px;
+  width: 100%;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  opacity: 50%;
+  text-align: center;
+  border-top: 4px solid gray;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+}
 #info{
   font-size: 1.5rem;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
