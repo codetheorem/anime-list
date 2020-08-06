@@ -25,7 +25,8 @@
          <appcard  v-for="(item,i) in watchlist" :key="i"
                   :data="item"
                   :index="i"
-                  @removed="remove($event)"/>
+                  @removed="remove($event)"
+                  @watch="watch($event)"/>
         </div>
        </ul>
       </div>
@@ -69,6 +70,7 @@ export default {
     addtowatchlist(item) {
       this.display = true
       this.searchdisplay=false
+      item.airing=false
       this.watchlist.push(item)
       const parsed = JSON.stringify(this.watchlist);
       localStorage.setItem('watchlist', parsed);
@@ -78,6 +80,17 @@ export default {
       if(this.watchlist.length<1){
         this.display=false
       }
+      const parsed = JSON.stringify(this.watchlist);
+      localStorage.setItem('watchlist', parsed);
+    },
+    watch(index) {
+      if(this.watchlist[index].airing){
+        this.watchlist[index].airing = true
+      }else{
+        this.watchlist[index].airing =false
+      }
+      const parsed = JSON.stringify(this.watchlist);
+      localStorage.setItem('watchlist', parsed);
     }
   },
   mounted() {

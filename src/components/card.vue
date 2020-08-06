@@ -1,5 +1,5 @@
 <template>
-<div :class="[ (watch === false) ? active : nonactive]">
+<div :class="[ (data.airing === false) ? active : nonactive]">
   <div class="row">
     <div class="col-4">
         <img :src="data.image_url" class="img-thumbnail" alt="...">
@@ -20,9 +20,9 @@
         </div>
         <br>
         <p class="card-text">{{data.synopsis}}</p>
-        <button type="button" class="btn btn-success" v-if="!watch" @click="watch=!watch">Watched</button>
-        <button type="button" class="btn btn-success" v-else @click="watch=!watch">Unwatched</button>
-        <button type="button" class="btn btn-danger" @click="remove(index)">Remove</button>
+        <button type="button" class="btn btn-success" v-if="!data.airing" @click="state()">Watched</button>
+        <button type="button" class="btn btn-success" v-else @click="state()">Unwatched</button>
+        <button type="button" class="btn btn-danger" @click="remove()">Remove</button>
         <a :href="data.url" target="_blank"><button  type="button" class="btn btn-primary">See more...</button></a>
       </div>
     </div>
@@ -41,10 +41,14 @@ export default {
       };
     },
     methods: {
-      remove(index) {
-        this.$emit('removed',index);
+      remove() {
+        this.$emit('removed',this.index);
+      },
+      state() {
+        this.data.airing = !this.data.airing
+        this.$emit('watch',this.index)
       }
-    }
+    },
 }
 </script>
 
@@ -56,9 +60,9 @@ export default {
   width: 100%;
   transition: all 0.2s linear;
   cursor: pointer;
-  opacity: 50%;
   text-align: center;
   border-top: 4px solid gray;
+  background-color: lightgrey;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
 }
 #info{
