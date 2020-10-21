@@ -1,17 +1,17 @@
-<template>
-    <div class="card" style="width: 18rem;">
-  <img :src="image" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{title}}</h5>
-    <p class="card-text">{{synopsis}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+<template>  
+  <li class="card mt-2" style="width: 18rem;">
+    <img :src="image" class="card-img-top" alt="anime-image">
+    <div class="card-body">
+      <h5 class="card-title">{{title}}</h5>
+      <p class="card-text">{{synopsis}}</p>
+      <a :href="url" target="_blank" class="btn btn-primary">see details</a>
+    </div>
+  </li>
 </template>
 
 <script>
 export default {
-    props: ['title','episodes','score','synopsis','image'],
+    props: ['title','episodes','score','synopsis','image', 'url'],
     
 }
 </script>
